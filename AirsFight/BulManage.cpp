@@ -280,18 +280,23 @@ float CBulManage::SearchAllPlane(CStage* pStage, D3DXVECTOR3 vecPos, D3DXVECTOR3
 	float		fTmp1, fTmp2;
 	int			i;
 
+	D3DXVECTOR3 diff;
+	D3DXMATRIX matBase;
+
 	fLenAdop = 99999;
 
 	/* ブロックタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetBlockNum(); i++)
 	{
 		/* キャラクタとオブジェクトが離れていたら調べない */
-		fTmp1 = D3DXVec3LengthSq(&( pStage->GetBlockObj(i)->GetPosBase() - vecPos) );
+		diff = pStage->GetBlockObj(i)->GetPosBase() - vecPos;
+		fTmp1 = D3DXVec3LengthSq(&diff );
 		fTmp2 = (pStage->GetBlockObj(i)->GetLength()) * (pStage->GetBlockObj(i)->GetLength());
 
 		if(fTmp1 < fTmp2)
 		{
-			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &pStage->GetBlockObj(i)->GetMatBase(),
+			matBase = pStage->GetBlockObj(i)->GetMatBase();
+			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &matBase,
 				&vecPos, &vecMove, NULL, NULL, &fLen))
 			{
 				if(fLenAdop > fLen)
@@ -306,7 +311,8 @@ float CBulManage::SearchAllPlane(CStage* pStage, D3DXVECTOR3 vecPos, D3DXVECTOR3
 	/* ウォールタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetWallNum(); i++)
 	{
-		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &pStage->GetWallObj(i)->GetMatBase(),
+		matBase = pStage->GetWallObj(i)->GetMatBase();
+		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &matBase,
 			&vecPos, &vecMove, NULL, NULL, &fLen))
 		{
 			if(fLenAdop > fLen)
