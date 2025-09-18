@@ -14,6 +14,7 @@
 //----------------------------------------------
 //	インクルード
 //----------------------------------------------
+#include "CompatiDX8.h"
 #include <d3dx8.h>
 #include "3DGraphicObj.h"
 #include "define.h"
