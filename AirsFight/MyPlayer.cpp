@@ -1315,7 +1315,7 @@ void CMyPlayer::ComputView()
 void CMyPlayer::IsLockON(CStage* pStage)
 {
 	RECT		rcTmp;
-	D3DXVECTOR3	vecTmp;
+	D3DXVECTOR3	vecTmp, vecTmp2;
 	int i;
 
 	/* キャラクタのプロジェクション座標の算出 */
@@ -1349,8 +1349,9 @@ void CMyPlayer::IsLockON(CStage* pStage)
 		vecTmp.x = m_tagEnemyData[i].pMatrix->_41;
 		vecTmp.y = m_tagEnemyData[i].pMatrix->_42;
 		vecTmp.z = m_tagEnemyData[i].pMatrix->_43;
-		if(D3DXVec3LengthSq( &(CChara::GetPosBase()-vecTmp) ) > 
-			(m_pParam->fLockLength * m_pParam->fLockLength) )
+		vecTmp2 = CChara::GetPosBase() - vecTmp;
+		if (D3DXVec3LengthSq(&vecTmp2) >
+			(m_pParam->fLockLength * m_pParam->fLockLength))
 			continue;
 
 		/* 二つの座標間に面が見つかったらダメ */

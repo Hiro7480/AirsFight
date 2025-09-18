@@ -44,7 +44,9 @@ HRESULT AIRS_FIGHT::OneTimeInit()
 	light.Diffuse.r = 0.5f; light.Ambient.r = 0.5f;
 	light.Diffuse.g = 0.5f; light.Ambient.g = 0.5f;
 	light.Diffuse.b = 0.5f; light.Ambient.b = 0.5f;
-	D3DXVec3Normalize( (D3DXVECTOR3*)&light.Direction, &D3DXVECTOR3(-2.0f, 4.0f, -2.0f) );
+
+	D3DXVECTOR3 ini(-2.0f, 4.0f, -2.0f);
+	D3DXVec3Normalize((D3DXVECTOR3*)&light.Direction, &ini);
 	light.Range = 100.0f;
 	m_pd3dDevice->LightEnable(0, TRUE);
 	m_pd3dDevice->SetLight(0, &light);			// ƒ‰ƒCƒg‚ğİ’è

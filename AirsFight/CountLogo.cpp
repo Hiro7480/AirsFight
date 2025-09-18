@@ -97,10 +97,12 @@ void CCountLogo::FrameMove()
 //----------------------------------------------
 void CCountLogo::Render(LPD3DXSPRITE pSprite)
 {
+	D3DXVECTOR2 vec2(m_fScaleStock, m_fScaleStock);
+
 	/* 透明値を入れたスプライト描画 */
 	pSprite->Draw(	m_pTexture,
 					&m_rectStock,
-					&D3DXVECTOR2(m_fScaleStock, m_fScaleStock),
+					&vec2,
 					NULL,
 					0.0f,
 					&m_vecStock,

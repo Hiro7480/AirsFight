@@ -89,10 +89,13 @@ void CLockOnMarker::FrameMove()
 //----------------------------------------------------------
 void CLockOnMarker::Render()
 {
+	D3DXVECTOR2 vec2;
+
 	m_pSprite->Begin();
 
 	/* スプライトを描画 */
-	m_pSprite->Draw(m_pTexture, &m_rectStock, &D3DXVECTOR2(m_fScale, m_fScale), 
+	vec2 = D3DXVECTOR2(m_fScale, m_fScale);
+	m_pSprite->Draw(m_pTexture, &m_rectStock, &vec2,
 		NULL, 0.0f, &m_vecStock, D3DCOLOR_ARGB((int)m_fAlpha, 255, 255, 255));
 
 	m_pSprite->End();

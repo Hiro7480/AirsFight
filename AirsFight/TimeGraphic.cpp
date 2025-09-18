@@ -134,17 +134,21 @@ void CTimeGraphic::FrameMove()
 //----------------------------------------------------------
 void CTimeGraphic::Render()
 {
+	D3DXVECTOR2 vec2;
+
 	/* 時間計測中でなかったら描画しない */
-	if(!m_bPlay) return;
+	if (!m_bPlay) return;
 
 	/* 描画開始 */
 	m_pSprite->Begin();
 
 	/* 時間を描画する */
-	for(int i=0; i<5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		m_pSprite->Draw(m_pTexture, &m_rcStock[i], NULL, NULL, 0.0f, 
-			&D3DXVECTOR2(m_vecPos.x+(30*i), m_vecPos.y), D3DCOLOR_ARGB(255, 255, 255, 255));
+		vec2 = D3DXVECTOR2(m_vecPos.x + (30 * i), m_vecPos.y);
+
+		m_pSprite->Draw(m_pTexture, &m_rcStock[i], NULL, NULL, 0.0f,
+			&vec2, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
 	/* 描画終了 */

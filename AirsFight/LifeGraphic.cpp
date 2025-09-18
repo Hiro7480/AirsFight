@@ -125,26 +125,30 @@ void CLifeGraphic::FrameMove()
 void CLifeGraphic::Render()
 {
 	RECT rcTmp;
+	D3DXVECTOR2 vec2;
 
 	/* 描画開始 */
 	m_pSprite->Begin();
 
 	/* 背景を半透明で描画する */
-	SetRect(&rcTmp, 0, 330, 210, 420); 
-	m_pSprite->Draw(m_pTexture, &rcTmp, NULL, NULL, 0.0f, 
-		&D3DXVECTOR2(m_vecPos.x-5.0f, m_vecPos.y-5.0f), D3DCOLOR_ARGB(128, 255, 255, 255));
+	SetRect(&rcTmp, 0, 330, 210, 420);
+	vec2 = D3DXVECTOR2(m_vecPos.x - 5.0f, m_vecPos.y - 5.0f);
+	m_pSprite->Draw(m_pTexture, &rcTmp, NULL, NULL, 0.0f,
+		&vec2, D3DCOLOR_ARGB(128, 255, 255, 255));
 
 	/* 外枠を描画する */
-	SetRect(&rcTmp, 0, 240, 210, 330); 
-	m_pSprite->Draw(m_pTexture, &rcTmp, NULL, NULL, 0.0f, 
-		&D3DXVECTOR2(m_vecPos.x-5.0f, m_vecPos.y-5.0f), D3DCOLOR_ARGB(255, 255, 255, 255));
+	SetRect(&rcTmp, 0, 240, 210, 330);
+	vec2 = D3DXVECTOR2(m_vecPos.x - 5.0f, m_vecPos.y - 5.0f);
+	m_pSprite->Draw(m_pTexture, &rcTmp, NULL, NULL, 0.0f,
+		&vec2, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
 	/* ライフを描画する */
-	for(int i=0; i<4; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		m_pSprite->Draw(m_pTexture, &m_rcStock[i], NULL, NULL, 0.0f, 
-			&D3DXVECTOR2(m_vecPos.x+(50*i), m_vecPos.y), D3DCOLOR_ARGB(255, 255, 255, 255));
+		vec2 = D3DXVECTOR2(m_vecPos.x + (50 * i), m_vecPos.y);
+		m_pSprite->Draw(m_pTexture, &m_rcStock[i], NULL, NULL, 0.0f,
+			&vec2, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
 	/* 描画終了 */
