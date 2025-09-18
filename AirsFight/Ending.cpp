@@ -83,7 +83,7 @@ HRESULT CEnding::InitOrder(int nDeadNum1, int nDeadNum2, int nDeadNum3, int nDea
 										m_tagChara[i].strName,m_tagChara[i].nDeadNum);
 
 	/* ”wŒi‚Ìì¬ */
-	m_pBackGround = new CScrollBG(m_pd3dDevice, "data\\Ending\\EndingBG.png", 256, 256);
+	m_pBackGround = new CScrollBG(m_pd3dDevice, const_cast<TCHAR*>("data\\Ending\\EndingBG.png"), 256, 256);
 	m_pBackGround->SetVecDir(D3DXVECTOR2(0.0, 1.0));
 
 	/* ƒƒS‚Ìì¬ */

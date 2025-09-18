@@ -17,7 +17,7 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 {
 	/* ＲＴ－ＯＮＥパラメータの設定 */
 	m_CharaParam[0].pMeshData = new CMeshData(m_pd3dDevice);// メッシュ読み込み
-	m_CharaParam[0].pMeshData->Create("data\\Chara\\RT-One\\RT-One.X");
+	m_CharaParam[0].pMeshData->Create(const_cast<TCHAR*>("data\\Chara\\RT-One\\RT-One.X"));
 
 	m_CharaParam[0].nMaxLife     = 2800;		// 最大ＨＰ
 	m_CharaParam[0].nMaxEnergy   = 1000;		// 最大エネルギー
@@ -43,7 +43,7 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* ＲＴ－ＴＷＯパラメータの設定 */
 	m_CharaParam[1].pMeshData = new CMeshData(m_pd3dDevice);// メッシュ読み込み
-	m_CharaParam[1].pMeshData->Create("data\\Chara\\RT-Two\\RT-Two.X");
+	m_CharaParam[1].pMeshData->Create(const_cast<TCHAR*>("data\\Chara\\RT-Two\\RT-Two.X"));
 
 	m_CharaParam[1].nMaxLife     = 3500;		// 最大ＨＰ
 	m_CharaParam[1].nMaxEnergy   = 1500;		// 最大エネルギー
@@ -69,7 +69,7 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* ＲＴ－ＴＨＲＥＥパラメータの設定 */
 	m_CharaParam[2].pMeshData = new CMeshData(m_pd3dDevice);// メッシュ読み込み
-	m_CharaParam[2].pMeshData->Create("data\\Chara\\RT-Three\\RT-Three.X");
+	m_CharaParam[2].pMeshData->Create(const_cast<TCHAR*>("data\\Chara\\RT-Three\\RT-Three.X"));
 
 	m_CharaParam[2].nMaxLife     = 2500;		// 最大ＨＰ
 	m_CharaParam[2].nMaxEnergy   = 800;			// 最大エネルギー
@@ -95,7 +95,7 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* ＲＴ－ＦＯＵＲパラメータの設定 */
 	m_CharaParam[3].pMeshData = new CMeshData(m_pd3dDevice);// メッシュ読み込み
-	m_CharaParam[3].pMeshData->Create("data\\Chara\\RT-Four\\RT-Four.X");
+	m_CharaParam[3].pMeshData->Create(const_cast<TCHAR*>("data\\Chara\\RT-Four\\RT-Four.X"));
 
 	m_CharaParam[3].nMaxLife     = 4000;		// 最大ＨＰ
 	m_CharaParam[3].nMaxEnergy   = 2000;		// 最大エネルギー
@@ -122,58 +122,58 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* モーションデータの読み込み */
 	m_pMotionData[ANI_STOP] = new CMotionData(m_pd3dDevice);			// 立ち
-	m_pMotionData[ANI_STOP]->Create("data\\Chara\\Motion\\Stop.X");
+	m_pMotionData[ANI_STOP]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\Stop.X"));
 
 	m_pMotionData[ANI_FORWARD] = new CMotionData(m_pd3dDevice);			// 前進
-	m_pMotionData[ANI_FORWARD]->Create("data\\Chara\\Motion\\Forward.X");
+	m_pMotionData[ANI_FORWARD]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\Forward.X"));
 
 	m_pMotionData[ANI_BACK] = new CMotionData(m_pd3dDevice);			// 後退
-	m_pMotionData[ANI_BACK]->Create("data\\Chara\\Motion\\Back.X");
+	m_pMotionData[ANI_BACK]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\Back.X"));
 
 	m_pMotionData[ANI_DASH_F] = new CMotionData(m_pd3dDevice);			// 前へダッシュ
-	m_pMotionData[ANI_DASH_F]->Create("data\\Chara\\Motion\\DashForward.X");
+	m_pMotionData[ANI_DASH_F]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DashForward.X"));
 
 	m_pMotionData[ANI_DASH_B] = new CMotionData(m_pd3dDevice);			// 後ろへダッシュ
-	m_pMotionData[ANI_DASH_B]->Create("data\\Chara\\Motion\\DashBack.X");
+	m_pMotionData[ANI_DASH_B]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DashBack.X"));
 
 	m_pMotionData[ANI_DASH_R] = new CMotionData(m_pd3dDevice);			// 右へダッシュ
-	m_pMotionData[ANI_DASH_R]->Create("data\\Chara\\Motion\\DashRight.X");
+	m_pMotionData[ANI_DASH_R]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DashRight.X"));
 
 	m_pMotionData[ANI_DASH_L] = new CMotionData(m_pd3dDevice);			// 左へダッシュ
-	m_pMotionData[ANI_DASH_L]->Create("data\\Chara\\Motion\\DashLeft.X");
+	m_pMotionData[ANI_DASH_L]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DashLeft.X"));
 
 	m_pMotionData[ANI_ATAS] = new CMotionData(m_pd3dDevice);			// 攻撃構え
-	m_pMotionData[ANI_ATAS]->Create("data\\Chara\\Motion\\GunSta.X");
+	m_pMotionData[ANI_ATAS]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\GunSta.X"));
 
 	m_pMotionData[ANI_ATA] = new CMotionData(m_pd3dDevice);				// 攻撃
-	m_pMotionData[ANI_ATA]->Create("data\\Chara\\Motion\\GunMot.X");
+	m_pMotionData[ANI_ATA]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\GunMot.X"));
 
 	m_pMotionData[ANI_JUMP_N] = new CMotionData(m_pd3dDevice);			// 垂直ジャンプ
-	m_pMotionData[ANI_JUMP_N]->Create("data\\Chara\\Motion\\JumpNormal.X");
+	m_pMotionData[ANI_JUMP_N]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\JumpNormal.X"));
 
 	m_pMotionData[ANI_JUMP_F] = new CMotionData(m_pd3dDevice);			// 前方ジャンプ
-	m_pMotionData[ANI_JUMP_F]->Create("data\\Chara\\Motion\\JumpForward.X");
+	m_pMotionData[ANI_JUMP_F]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\JumpForward.X"));
 
 	m_pMotionData[ANI_JUMP_B] = new CMotionData(m_pd3dDevice);			// 後方ジャンプ
-	m_pMotionData[ANI_JUMP_B]->Create("data\\Chara\\Motion\\JumpBack.X");
+	m_pMotionData[ANI_JUMP_B]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\JumpBack.X"));
 
 	m_pMotionData[ANI_JUMP_S] = new CMotionData(m_pd3dDevice);			// ジャンプ開始
-	m_pMotionData[ANI_JUMP_S]->Create("data\\Chara\\Motion\\JumpStart.X");
+	m_pMotionData[ANI_JUMP_S]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\JumpStart.X"));
 
 	m_pMotionData[ANI_JUMP_E] = new CMotionData(m_pd3dDevice);			// ジャンプ終了
-	m_pMotionData[ANI_JUMP_E]->Create("data\\Chara\\Motion\\JumpStart.X");
+	m_pMotionData[ANI_JUMP_E]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\JumpStart.X"));
 
 	m_pMotionData[ANI_DAM_L] = new CMotionData(m_pd3dDevice);			// 地面ダメージ
-	m_pMotionData[ANI_DAM_L]->Create("data\\Chara\\Motion\\DamageLand.X");
+	m_pMotionData[ANI_DAM_L]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DamageLand.X"));
 
 	m_pMotionData[ANI_DAM_A] = new CMotionData(m_pd3dDevice);			// 空中ダメージ
-	m_pMotionData[ANI_DAM_A]->Create("data\\Chara\\Motion\\DamageAir.X");
+	m_pMotionData[ANI_DAM_A]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DamageAir.X"));
 
 	m_pMotionData[ANI_DEAD_L] = new CMotionData(m_pd3dDevice);			// 地面死亡
-	m_pMotionData[ANI_DEAD_L]->Create("data\\Chara\\Motion\\DeadLand.X");
+	m_pMotionData[ANI_DEAD_L]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DeadLand.X"));
 
 	m_pMotionData[ANI_DEAD_A] = new CMotionData(m_pd3dDevice);			// 空中死亡
-	m_pMotionData[ANI_DEAD_A]->Create("data\\Chara\\Motion\\DeadAir.X");
+	m_pMotionData[ANI_DEAD_A]->Create(const_cast<TCHAR*>("data\\Chara\\Motion\\DeadAir.X"));
 
 
 	/* 変数の初期化 */
@@ -200,10 +200,10 @@ CGame::CGame(LPDIRECT3DDEVICE8 d3dDevice)
 	m_pEffectManage = new CEffectManage(m_pd3dDevice);
 
 	/* エネルギーゲージの作成 */
-	m_pEnergyGauge = new CEnergyGauge(m_pd3dDevice, "data\\game\\EnergyGauge.png");
+	m_pEnergyGauge = new CEnergyGauge(m_pd3dDevice, const_cast<TCHAR*>("data\\game\\EnergyGauge.png"));
 
 	/* ライフグラフィックの作成 */
-	m_pLifeGraphic = new CLifeGraphic(m_pd3dDevice, "data\\game\\LifeGraphic.png");
+	m_pLifeGraphic = new CLifeGraphic(m_pd3dDevice, const_cast<TCHAR*>("data\\game\\LifeGraphic.png"));
 
 	/* 時間管理クラスの作成 */
 	m_pTimeGraphic = new CTimeGraphic(m_pd3dDevice);
@@ -262,10 +262,10 @@ HRESULT CGame::CreateChara(int SelectChara[])
 	m_pChara[3] = new CEnemyCPU(m_pd3dDevice);
 
 	/* 名前をセットする*/
-	m_pChara[0]->SetName("PLAYER");
-	m_pChara[1]->SetName("COMPUTER1");
-	m_pChara[2]->SetName("COMPUTER2");
-	m_pChara[3]->SetName("COMPUTER3");
+	m_pChara[0]->SetName(const_cast<TCHAR*>("PLAYER"));
+	m_pChara[1]->SetName(const_cast<TCHAR*>("COMPUTER1"));
+	m_pChara[2]->SetName(const_cast<TCHAR*>("COMPUTER2"));
+	m_pChara[3]->SetName(const_cast<TCHAR*>("COMPUTER3"));
 
 	/* 番号をセットする */
 	m_pChara[0]->SetNum(0);
@@ -416,7 +416,7 @@ int CGame::FrameMove()
 void CGame::Start()
 {
 	static CListSprite*	pCountLogo;
-	static nCnt = 0;
+	static int nCnt = 0;
 
 	/* ２秒たったらスタートロゴを作成する */
 	if(nCnt == 120)	pCountLogo = m_pSpriteManage->AddSprite(COUNT_LOGO);
@@ -519,7 +519,7 @@ void CGame::Game()
 bool CGame::End()
 {
 	static CListSprite*	pEndLogo;
-	static nCnt = 0;
+	static int nCnt = 0;
 
 	/* はじめに終了ロゴを作成する */
 	if(nCnt == 0)	pEndLogo = m_pSpriteManage->AddSprite(TIME_OVER);
