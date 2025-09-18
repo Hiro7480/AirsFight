@@ -15,7 +15,7 @@
 CMenu::CMenu(LPDIRECT3DDEVICE8 d3dDevice)
 	  :GameStatus(d3dDevice)
 {	
-	long	lTmp;
+	time_t	t;
 	int		i;
 
 	/* コンピュータフラグの初期化 */
@@ -29,20 +29,20 @@ CMenu::CMenu(LPDIRECT3DDEVICE8 d3dDevice)
 	m_bOK[0] = false;			// 準備まだ
 
 	/* コンピュータをランダムで決める */
-	srand(time(&lTmp));		// ランダムの初期化
+	srand((unsigned int)(time(&t)));		// ランダムの初期化
 	for(i=1; i<4; i++)
 	{
-		srand(lTmp * rand()%500);
+		srand(t * rand()%500);
 		m_nSelectChara[i] = rand()%4;	// キャラクタを決める
 		m_bOK[i] = true;				// 準備ＯＫ
 	}
 
 	/* メニュー背景の作成 */
-	m_pBackGround = new CScrollBG(m_pd3dDevice, "data\\Menu\\MenuBG.png", 256, 256);
+	m_pBackGround = new CScrollBG(m_pd3dDevice, const_cast<TCHAR*>("data\\Menu\\MenuBG.png"), 256, 256);
 	m_pBackGround->SetVecDir(D3DXVECTOR2(1.0, 1.0));
 
 	/* メニューロゴの作成 */
-	m_pLogo = new CSprite(m_pd3dDevice, "Data\\Menu\\MenuLogo.png");
+	m_pLogo = new CSprite(m_pd3dDevice, const_cast<TCHAR*>("Data\\Menu\\MenuLogo.png"));
 	m_pLogo->SetVec(D3DXVECTOR2(64, 8));
 	m_pLogo->SetRec(0,0,512,64);
 
@@ -50,23 +50,23 @@ CMenu::CMenu(LPDIRECT3DDEVICE8 d3dDevice)
 	for(i=0; i<4; i++)
 	{
 		/* キャラクタイメージの作成 */
-		m_pCharaImage[i] = new CSprite(m_pd3dDevice, "Data\\Menu\\CharaImage.png");
+		m_pCharaImage[i] = new CSprite(m_pd3dDevice, const_cast<TCHAR*>("Data\\Menu\\CharaImage.png"));
 
 		/* ＲＥＡＤＹスプライトの作成 */
-		m_pReady[i]		 = new CSprite(m_pd3dDevice, "Data\\Menu\\Ready.png");
+		m_pReady[i] = new CSprite(m_pd3dDevice, const_cast<TCHAR*>("Data\\Menu\\Ready.png"));
 		m_pReady[i]->SetRec(0,0,200,128);
 
 		/* プレイヤーの名前の作成 */
-		m_pPlayerName[i] = new CFont(m_pd3dDevice, "HGPｺﾞｼｯｸE", 30);
+		m_pPlayerName[i] = new CFont(m_pd3dDevice, const_cast<TCHAR*>("HGPｺﾞｼｯｸE"), 30);
 		m_pPlayerName[i]->SetFormat(DT_CENTER);
 		m_pPlayerName[i]->SetColor(255, 0, 0);
 	}
 
 	/* プレイヤー名の格納 */
-	m_pPlayerName[0]->SetString( "PLAYER" );
-	m_pPlayerName[1]->SetString( "COMPUTER1" );
-	m_pPlayerName[2]->SetString( "COMPUTER2" );
-	m_pPlayerName[3]->SetString( "COMPUTER3" );
+	m_pPlayerName[0]->SetString(const_cast<TCHAR*>("PLAYER"));
+	m_pPlayerName[1]->SetString(const_cast<TCHAR*>("COMPUTER1"));
+	m_pPlayerName[2]->SetString(const_cast<TCHAR*>("COMPUTER2"));
+	m_pPlayerName[3]->SetString(const_cast<TCHAR*>("COMPUTER3"));
 
 	/* キャラクタスプライトの描画位置の初期化 */
 	m_pCharaImage[0]->SetVec(D3DXVECTOR2(0, 80));

@@ -87,7 +87,7 @@ HRESULT CEnding::InitOrder(int nDeadNum1, int nDeadNum2, int nDeadNum3, int nDea
 	m_pBackGround->SetVecDir(D3DXVECTOR2(0.0, 1.0));
 
 	/* ÉçÉSÇÃçÏê¨ */
-	m_pLogo = new CSprite(m_pd3dDevice, "Data\\Ending\\EndingLogo.png");
+	m_pLogo = new CSprite(m_pd3dDevice, const_cast<TCHAR*>("Data\\Ending\\EndingLogo.png"));
 	m_pLogo->SetVec(D3DXVECTOR2(64, 30));
 	m_pLogo->SetRec(0,0,512,64);
 
