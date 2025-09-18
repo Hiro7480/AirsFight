@@ -90,40 +90,40 @@ void CTimeGraphic::FrameMove()
 	time(&m_lNowTime);
 
 	/* 開始時間からの経過時間を求める */
-	long lTmp;
-	lTmp = m_lNowTime - m_lStartTime;
+	time_t t;
+	t = m_lNowTime - m_lStartTime;
 
 	/* 最大制限時間から、残り制限時間を求める */
-	m_lLimitTime = m_lMaxTime - lTmp;
+	m_lLimitTime = m_lMaxTime - t;
 
 	/* 残り制限時間が0以下だったら計算がおかしくなりそうなので終了する */
 	if(m_lLimitTime < 0) return;
 
 	/* 残り制限時間を分と秒に分割する */
-	long lMinute = m_lLimitTime / 60;
-	long lSecond = m_lLimitTime % 60;
+	time_t tMinute = m_lLimitTime / 60;
+	time_t tSecond = m_lLimitTime % 60;
 
 	/* 残り制限時間から、RECT値を求める */
 	int nTmp;
 
 	/* 10分の位のRECTを求める */
-	nTmp = lMinute / 10;
-	SetRect(&m_rcBase[0], 30*nTmp, 0, 30*(nTmp+1), 50);
+	nTmp = (int)(tMinute / 10);
+	SetRect(&m_rcBase[0], 30 * nTmp, 0, 30 * (nTmp + 1), 50);
 
 	/* 1分の位のRECTを求める */
-	nTmp = lMinute % 10;
-	SetRect(&m_rcBase[1], 30*nTmp, 0, 30*(nTmp+1), 50);
+	nTmp = tMinute % 10;
+	SetRect(&m_rcBase[1], 30 * nTmp, 0, 30 * (nTmp + 1), 50);
 
 	/* 「：」のマークは固定 */
 	SetRect(&m_rcBase[2], 300, 0, 330, 50);
 
 	/* 10秒の位のRECTを求める */
-	nTmp = lSecond / 10;
-	SetRect(&m_rcBase[3], 30*nTmp, 0, 30*(nTmp+1), 50);
+	nTmp = (int)(tSecond / 10);
+	SetRect(&m_rcBase[3], 30 * nTmp, 0, 30 * (nTmp + 1), 50);
 
 	/* 1秒の位のRECTを求める */
-	nTmp = lSecond % 10;
-	SetRect(&m_rcBase[4], 30*nTmp, 0, 30*(nTmp+1), 50);
+	nTmp = tSecond % 10;
+	SetRect(&m_rcBase[4], 30 * nTmp, 0, 30 * (nTmp + 1), 50);
 }
 
 //----------------------------------------------------------

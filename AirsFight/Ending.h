@@ -32,11 +32,11 @@ class CEnding : public GameStatus
 		int		nOrder;				// 順位
 	};
 
-	TChara			m_tagChara[4];	// キャラクタデータ
-	COrderSprite*	m_pOrder[4];	// 順位スプライト
+	TChara			m_tagChara[4];							// キャラクタデータ
+	COrderSprite*	m_pOrder[4] = {NULL,NULL,NULL,NULL};	// 順位スプライト
 
-	CSprite*		m_pLogo;		// エンディング時のロゴ
-	CScrollBG*		m_pBackGround;	// 背景のタイル
+	CSprite*		m_pLogo = NULL;							// エンディング時のロゴ
+	CScrollBG*		m_pBackGround = NULL;					// 背景のタイル
 
 public:
 	int		FrameMove();			// 毎フレームの処理

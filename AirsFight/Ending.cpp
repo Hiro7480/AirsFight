@@ -19,7 +19,6 @@ CEnding::CEnding(LPDIRECT3DDEVICE8 d3dDevice)
 	strcpy(m_tagChara[1].strName, "COMPUTER1");
 	strcpy(m_tagChara[2].strName, "COMPUTER2");
 	strcpy(m_tagChara[3].strName, "COMPUTER3");
-
 }
 
 //----------------------------------------------

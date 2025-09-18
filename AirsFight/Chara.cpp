@@ -219,7 +219,7 @@ void CChara::IsHitBullet(CBulManage* pBulManage,
 	// この辺は武器によって変える（予定）
 
 	int nDamage;						// ダメージ値の格納
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	nDamage = rand()%500 + 500;
 	m_nNowLife  -= nDamage;
 

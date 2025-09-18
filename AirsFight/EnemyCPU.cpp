@@ -134,13 +134,13 @@ void CEnemyCPU::ComputNextAction(CEffectManage* pEffectManage)
 
 	/* 行動を続ける時間を10フレーム～30フレームからランダムで決める */
 
-	srand(time(NULL));		// ランダムの初期化
+	srand((unsigned int)time(NULL));		// ランダムの初期化
 	m_nActionCount = rand()%20 + 10;
 
 
 	/* 現在の行動により次の行動をランダムにて決める */
 	static time_t t;
-	srand(t * time(&t));		// ランダムの初期化
+	srand((unsigned int)(t * time(&t)));		// ランダムの初期化
 	switch(m_nNowAction)
 	{
 	/* スタート時 何もしない */
@@ -303,13 +303,13 @@ void CEnemyCPU::ComputNextAction(CEffectManage* pEffectManage)
 	m_tagVirtualKey.Right = false;
 
 	/* 上下を決める ６割で上 １割で下 ３割で無し*/
-	srand(time(NULL));		// ランダムの初期化
+	srand((unsigned int)time(NULL));		// ランダムの初期化
 	nTmp = rand()%10;
 	if		(0 <= nTmp && nTmp < 6)		m_tagVirtualKey.Up = true;
 	else if	(nTmp == 6)					m_tagVirtualKey.Down = true;
 
 	/* 左右を決める ６割で無し ２割で右 ２割で左 */
-	srand(time(NULL));		// ランダムの初期化
+	srand((unsigned int)time(NULL));		// ランダムの初期化
 	nTmp = rand()%10;
 	if		(0 <= nTmp && nTmp < 2)	m_tagVirtualKey.Right = true;
 	else if	(2 <= nTmp && nTmp < 4)	m_tagVirtualKey.Left = true;

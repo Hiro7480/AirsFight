@@ -47,7 +47,7 @@ public:
 	bool	IsEnd();			// 残り制限時間がなくなったか？
 
 	/* アクセス関数 */
-	long GetLimitTime(){return m_lLimitTime;};				// 残り制限時間の取得
+	time_t GetLimitTime(){return m_lLimitTime;};				// 残り制限時間の取得
 
 	void SetStartTime(long lTime){m_lStartTime = lTime;};	// 開始時間のセット
 	void SetNowTime(long lTime){m_lNowTime = lTime;};		// 現在時間のセット
