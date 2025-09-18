@@ -21,7 +21,8 @@
 さらに Windows 11 + Visual Studio 2022 でもビルドを行い、移植しております。
 
 ## ポートフォリオデータ
-実行ファイルやスクリーンショットはこちら 👉 [Google Drive](https://drive.google.com/～～～～)
+実行ファイルやスクリーンショットはこちら 
+https://drive.google.com/file/d/1EuIKAvXrupdM-nDQvym006Bal9sp4QhV/view?usp=drive_link
 
 ## 操作方法（抜粋）
 - 移動 : ↑↓←→  
