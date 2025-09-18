@@ -25,11 +25,11 @@
 class CTimeGraphic : public CSprite
 {
 private:
-	long	m_lStartTime;		// 開始時間
-	long	m_lNowTime;			// 現在時間
+	time_t	m_lStartTime;		// 開始時間
+	time_t	m_lNowTime;			// 現在時間
 
-	long	m_lMaxTime;			// 最大制限時間
-	long	m_lLimitTime;		// 残り制限時間
+	time_t	m_lMaxTime;			// 最大制限時間
+	time_t	m_lLimitTime;		// 残り制限時間
 
 	bool	m_bPlay;			// 時間計測中か？
 

@@ -12,7 +12,7 @@
 //	Out:	‚È‚µ
 //----------------------------------------------------------
 CTimeGraphic::CTimeGraphic(LPDIRECT3DDEVICE8 d3dDevice)
-			 :CSprite(d3dDevice, "data\\game\\TimeGraphic.png")
+	:CSprite(d3dDevice, const_cast<TCHAR*>("data\\game\\TimeGraphic.png"))
 {
 	/* •Ï”‚Ì‰Šú‰» */
 	m_lStartTime = 0;

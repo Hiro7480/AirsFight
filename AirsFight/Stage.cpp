@@ -18,23 +18,23 @@ CStage::CStage(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* ƒƒbƒVƒ…‚Ìì¬ */
 	m_pMeshObject[0] = new CMeshObject(m_pd3dDevice);
-	m_pMeshObject[0]->Create("Data\\Stage\\Wall.x");
+	m_pMeshObject[0]->Create(const_cast<TCHAR*>("Data\\Stage\\Wall.x"));
 	m_pMeshObject[0]->RestoreDeviceObjects();
 
 	m_pMeshObject[1] = new CMeshObject(m_pd3dDevice);
-	m_pMeshObject[1]->Create("Data\\Stage\\Block.x");
+	m_pMeshObject[1]->Create(const_cast<TCHAR*>("Data\\Stage\\Block.x"));
 	m_pMeshObject[1]->RestoreDeviceObjects();
 
 	m_pMeshObject[2] = new CMeshObject(m_pd3dDevice);
-	m_pMeshObject[2]->Create("data\\Stage\\Bridge.x");
+	m_pMeshObject[2]->Create(const_cast<TCHAR*>("data\\Stage\\Bridge.x"));
 	m_pMeshObject[2]->RestoreDeviceObjects();
 
 	m_pMeshObject[3] = new CMeshObject(m_pd3dDevice);
-	m_pMeshObject[3]->Create("data\\Stage\\Block2.x");
+	m_pMeshObject[3]->Create(const_cast<TCHAR*>("data\\Stage\\Block2.x"));
 	m_pMeshObject[3]->RestoreDeviceObjects();
 
 	m_pMeshObject[4] = new CMeshObject(m_pd3dDevice);
-	m_pMeshObject[4]->Create("data\\Stage\\Block3.x");
+	m_pMeshObject[4]->Create(const_cast<TCHAR*>("data\\Stage\\Block3.x"));
 	m_pMeshObject[4]->RestoreDeviceObjects();
 
 	int i;
