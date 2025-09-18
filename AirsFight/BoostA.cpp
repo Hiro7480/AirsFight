@@ -80,8 +80,10 @@ void CBoostA::InitParticle()
 //----------------------------------------------
 void CBoostA::FrameMove()
 {
+	int i;
+
 	/* パーティクルの移動 */
-	for(int i=0; i<m_nParticleNum; i++)
+	for(i=0; i<m_nParticleNum; i++)
 	{
 		/* 移動量の更新 */
 		m_Particle[i].dir.x = float(rand()%20-10)/20.0f;

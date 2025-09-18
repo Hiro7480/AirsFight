@@ -14,6 +14,7 @@
 //----------------------
 //	インクルード
 //----------------------
+#include "CompatiDX8.h"
 #include "Chara.h"
 #include "LockOnMarker.h"
 #include "Font.h"

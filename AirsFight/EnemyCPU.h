@@ -15,6 +15,7 @@
 //--------------------------
 //	インクルード
 //--------------------------
+#include "CompatiDX8.h"
 #include "Chara.h"
 #include <time.h>
 

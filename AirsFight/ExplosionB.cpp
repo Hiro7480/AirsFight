@@ -86,8 +86,10 @@ void CExplosionB::InitParticle()
 //----------------------------------------------
 void CExplosionB::FrameMove()
 {
+	int i;
+
 	// パーティクルの移動
-	for(int i=0; i<m_nParticleNum; i++)
+	for(i=0; i<m_nParticleNum; i++)
 	{
 		m_Particle[i].pos += m_Particle[i].dir;			// 位置の更新
 

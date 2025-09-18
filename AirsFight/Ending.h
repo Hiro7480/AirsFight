@@ -14,6 +14,7 @@
 //------------------------------
 //	インクルード
 //------------------------------
+#include "CompatiDX8.h"
 #include "GameStatus.h"
 #include "OrderSprite.h"
 #include "ScrollBG.h"

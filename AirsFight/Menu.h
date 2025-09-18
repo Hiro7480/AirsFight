@@ -13,6 +13,7 @@
 //------------------------------
 //	インクルード
 //------------------------------
+#include "CompatiDX8.h"
 #include "GameStatus.h"
 #include "Sprite.h"
 #include "ScrollBG.h"

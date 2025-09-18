@@ -11,6 +11,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "CompatiDX8.h"
 #include "Chara.h"
 
 //----------------------------------------------

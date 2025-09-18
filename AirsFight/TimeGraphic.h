@@ -14,6 +14,7 @@
 //--------------------------
 //	インクルード
 //--------------------------
+#include "CompatiDX8.h"
 #include <time.h>
 #include "Sprite.h"
 

@@ -58,9 +58,10 @@ HRESULT CEnding::InitOrder(int nDeadNum1, int nDeadNum2, int nDeadNum3, int nDea
 	bool	bOKFlg[4] = {false, false, false, false};
 	int		nMaxDeadNum = 0;
 	int		nMaxNumber;
+	int		i;
 
 	/* ‚SˆÊ‚©‚ç‡‚ÉŒˆ‚ß‚Ä‚¢‚­ */
-	for(int i=4; i>0; i--)
+	for(i=4; i>0; i--)
 	{
 		for(int j=0; j<4; j++)
 		{

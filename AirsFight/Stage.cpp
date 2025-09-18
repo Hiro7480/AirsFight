@@ -37,7 +37,8 @@ CStage::CStage(LPDIRECT3DDEVICE8 d3dDevice)
 	m_pMeshObject[4]->Create("data\\Stage\\Block3.x");
 	m_pMeshObject[4]->RestoreDeviceObjects();
 
-	for(int i=5; i<10; i++)		m_pMeshObject[i] = NULL;
+	int i;
+	for(i=5; i<10; i++)		m_pMeshObject[i] = NULL;
 
 	/* ブロック数の設定 */
 	m_nBlockNum = 17;
@@ -162,8 +163,10 @@ CStage::~CStage()
 //----------------------------------------------
 void CStage::FrameMove()
 {
+	int i;
+
 	/* そのステージにある全てのオブジェクトを移動 */
-	for(int i=0; i<m_nBlockNum; i++)
+	for(i=0; i<m_nBlockNum; i++)
 		m_pBlock[i]->FrameMove();
 
 	for(i=0; i<m_nWallNum; i++)
@@ -179,8 +182,10 @@ void CStage::FrameMove()
 //----------------------------------------------
 void CStage::Render()
 {
+	int i;
+
 	/* そのステージにある全てのオブジェクトを描画 */
-	for(int i=0; i<m_nBlockNum; i++)
+	for(i=0; i<m_nBlockNum; i++)
 		m_pBlock[i]->Render();
 
 	for(i=0; i<m_nWallNum; i++)
@@ -195,8 +200,10 @@ void CStage::Render()
 //----------------------------------------------
 void CStage::UpDate()
 {
+	int i;
+
 	/* そのステージにある全てのオブジェクトを更新 */
-	for(int i=0; i<m_nBlockNum; i++)
+	for(i=0; i<m_nBlockNum; i++)
 		m_pBlock[i]->UpDate();
 
 	for(i=0; i<m_nWallNum; i++)
