@@ -80,14 +80,16 @@ void CChara::Render()
 {
 	D3DXMATRIX	matView;
 	D3DXVECTOR3	vecTmp;
+	D3DXVECTOR3	vecTmp2;
 
 	/* ビューマトリクスの取得 */
 	m_pd3dDevice->GetTransform( D3DTS_VIEW, &matView );
 
 	/* 現在の座標値をビュー座標系に変換する */
-	D3DXVec3TransformCoord(&vecTmp, &CChara::GetPosBase(), &matView);
+	vecTmp2 = CChara::GetPosBase();
+	D3DXVec3TransformCoord(&vecTmp, &vecTmp2, &matView);
 
-	/* キャラクタがカメラの後ろにいたら描画しない！ */
+	/* キャラクタがカメラの後ろにいたら描画しない */
 	if(vecTmp.z < 0)	return;
 
 	/* キャラクタの描画 */
@@ -204,8 +206,9 @@ void CChara::IsHitBullet(CBulManage* pBulManage,
 
 		/* 弾が発生してから１フレーム以上たっている事、 */
 		/* キャラクタとの距離が一定以内である事の場合、当たったとみなす */
-		if(	pBullet->GetTimeCount() > 1 &&
-			D3DXVec3LengthSq( &(C3DGraphicObj::GetPosBase() - vecBulPos) ) < (HIT_CHARA_LENGTH * HIT_CHARA_LENGTH) ) 
+		D3DXVECTOR3 diff = C3DGraphicObj::GetPosBase() - vecBulPos;
+
+		if(	pBullet->GetTimeCount() > 1 && D3DXVec3LengthSq(&diff) < (HIT_CHARA_LENGTH * HIT_CHARA_LENGTH) ) 
 			break;
 
 		/* 次の弾を調べる */
@@ -319,8 +322,9 @@ D3DXVECTOR3 CChara::GetVecToPlane(D3DXPLANE* plaGround, float fYaw)
 	matTmp._21 = vec3Y.x;	matTmp._22 = vec3Y.y;	matTmp._23 = vec3Y.z;
 	matTmp._31 = vec3Z.x;	matTmp._32 = vec3Z.y;	matTmp._33 = vec3Z.z;
 
-	// ようやく単位方向ベクトルの取得！
-	D3DXVec3TransformNormal(&vecAdop, &D3DXVECTOR3(0, 0, 1), &matTmp);
+	// 単位方向ベクトルの取得
+	D3DXVECTOR3 dir(0, 0, 1);
+	D3DXVec3TransformNormal(&vecAdop, &dir, &matTmp);
 
 	return vecAdop;
 
@@ -345,18 +349,27 @@ float CChara::SearchAllGround(CStage* pStage, D3DXPLANE* plaOut, D3DXVECTOR3* ve
 
 	fLenAdop = 99999;
 
+	D3DXMATRIX  mat;
+	D3DXVECTOR3 diff;
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 dir;
 
 	/* ブロックタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetBlockNum(); i++)
 	{
 		/* キャラクタとオブジェクトが離れていたら調べない */
-		fTmp1 = D3DXVec3LengthSq(&( pStage->GetBlockObj(i)->GetPosBase() - GetPosBase()) );
+		diff = pStage->GetBlockObj(i)->GetPosBase() - GetPosBase();
+
+		fTmp1 = D3DXVec3LengthSq(&diff);
 		fTmp2 = (pStage->GetBlockObj(i)->GetLength() + 5.0f) * (pStage->GetBlockObj(i)->GetLength()+ 5.0f);
 
 		if(fTmp1 < fTmp2)
 		{
-			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &pStage->GetBlockObj(i)->GetMatBase(),
-						&GetPosBase(),&D3DXVECTOR3(0,-1,0), &vecCross, &plaTmp, &fLen))
+			mat = pStage->GetBlockObj(i)->GetMatBase();
+			pos = GetPosBase();
+			dir = D3DXVECTOR3(0.0, -1.0, 0.0);
+			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &mat,
+						&pos,&dir, &vecCross, &plaTmp, &fLen))
 			{
 				if(fLenAdop > fLen)
 				{
@@ -372,8 +385,12 @@ float CChara::SearchAllGround(CStage* pStage, D3DXPLANE* plaOut, D3DXVECTOR3* ve
 	/* ウォールタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetWallNum(); i++)
 	{
-		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &pStage->GetWallObj(i)->GetMatBase(),
-					&GetPosBase(),&D3DXVECTOR3(0,-1,0), &vecCross, &plaTmp, &fLen))
+		mat = pStage->GetWallObj(i)->GetMatBase();
+		pos = GetPosBase();
+		dir = D3DXVECTOR3(0.0f, -1.0f, 0.0f);
+
+		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &mat,
+					&pos, &dir, &vecCross, &plaTmp, &fLen))
 		{
 			if(fLenAdop > fLen)
 			{
@@ -417,17 +434,26 @@ float CChara::SearchAllWall(CStage* pStage, D3DXVECTOR3* vecOut1, D3DXVECTOR3* v
 
 	fLenAdop = 99999;
 
+	D3DXMATRIX  mat;
+	D3DXVECTOR3 diff;
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 dir;
+
 	/* ブロックタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetBlockNum(); i++)
 	{
 		/* キャラクタとオブジェクトが離れていたら調べない */
-		fTmp1 = D3DXVec3LengthSq(&( pStage->GetBlockObj(i)->GetPosBase() - GetPosBase()) );
+		diff = pStage->GetBlockObj(i)->GetPosBase() - GetPosBase();
+		fTmp1 = D3DXVec3LengthSq(&diff);
 		fTmp2 = (pStage->GetBlockObj(i)->GetLength()) * (pStage->GetBlockObj(i)->GetLength());
 
 		if(fTmp1 < fTmp2)
 		{
-			if( SearchPlane2(pStage->GetBlockObj(i)->GetMesh(), &pStage->GetBlockObj(i)->GetMatBase(),
-					&GetPosBase(), &m_vecMove, &vecCross1, &vecCross2, NULL, &fLen))
+			mat = pStage->GetBlockObj(i)->GetMatBase();
+			pos = GetPosBase();
+
+			if( SearchPlane2(pStage->GetBlockObj(i)->GetMesh(), &mat,
+					&pos, &m_vecMove, &vecCross1, &vecCross2, NULL, &fLen))
 			{
 				if(fLenAdop > fLen)
 				{
@@ -443,8 +469,11 @@ float CChara::SearchAllWall(CStage* pStage, D3DXVECTOR3* vecOut1, D3DXVECTOR3* v
 	/* ウォールタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetWallNum(); i++)
 	{
-		if( SearchPlane2(pStage->GetWallObj(i)->GetMesh(), &pStage->GetWallObj(i)->GetMatBase(),
-				&GetPosBase(), &m_vecMove, &vecCross1, &vecCross2, NULL, &fLen))
+		mat = pStage->GetBlockObj(i)->GetMatBase();
+		pos = GetPosBase();
+
+		if( SearchPlane2(pStage->GetWallObj(i)->GetMesh(), &mat,
+				&pos, &m_vecMove, &vecCross1, &vecCross2, NULL, &fLen))
 		{
 			if(fLenAdop > fLen)
 			{
@@ -487,6 +516,11 @@ float CChara::SearchAllCeiling(CStage* pStage, D3DXPLANE* plaOut, D3DXVECTOR3* v
 
 	fLenAdop = 99999;
 
+	D3DXMATRIX  mat;
+	D3DXVECTOR3 diff;
+	D3DXVECTOR3 pos;
+	D3DXVECTOR3 dir;
+
 	/* キャラクタの移動ベクトルにジャンプ値をいれた移動ベクトルを算出 */
 	vecMove = m_vecMove;
 	vecMove *= m_fSpeed;
@@ -497,13 +531,17 @@ float CChara::SearchAllCeiling(CStage* pStage, D3DXPLANE* plaOut, D3DXVECTOR3* v
 	for(i=0; i<pStage->GetBlockNum(); i++)
 	{
 		/* キャラクタとオブジェクトが離れていたら調べない */
-		fTmp1 = D3DXVec3LengthSq(&( pStage->GetBlockObj(i)->GetPosBase() - GetPosBase()) );
+		diff = pStage->GetBlockObj(i)->GetPosBase() - GetPosBase();
+		fTmp1 = D3DXVec3LengthSq(&diff);
 		fTmp2 = (pStage->GetBlockObj(i)->GetLength()) * (pStage->GetBlockObj(i)->GetLength());
 
 		if(fTmp1 < fTmp2)
 		{
-			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &pStage->GetBlockObj(i)->GetMatBase(),
-						&GetPosBase(),&vecMove, &vecCross, &plaTmp, &fLen))
+			mat = pStage->GetBlockObj(i)->GetMatBase();
+			pos = GetPosBase();
+
+			if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), &mat,
+						&pos,&vecMove, &vecCross, &plaTmp, &fLen))
 			{
 				if(fLenAdop > fLen)
 				{
@@ -519,8 +557,11 @@ float CChara::SearchAllCeiling(CStage* pStage, D3DXPLANE* plaOut, D3DXVECTOR3* v
 	/* ウォールタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetWallNum(); i++)
 	{
-		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &pStage->GetWallObj(i)->GetMatBase(),
-					&GetPosBase(),&vecMove, &vecCross, &plaTmp, &fLen))
+		mat = pStage->GetBlockObj(i)->GetMatBase();
+		pos = GetPosBase();
+
+		if( SearchPlane(pStage->GetWallObj(i)->GetMesh(), &mat,
+					&pos,&vecMove, &vecCross, &plaTmp, &fLen))
 		{
 			if(fLenAdop > fLen)
 			{
@@ -558,16 +599,25 @@ bool CChara::SearchAllPlane(CStage* pStage, D3DXVECTOR3 vecPos1, D3DXVECTOR3 vec
 	D3DXVECTOR3	vecCross;
 	int			i;
 
+	D3DXMATRIX	mat;
+	D3DXVECTOR3	diff;
+	D3DXVECTOR3	diff2;
+
 	/* ブロックタイプのオブジェクトを調べる */
 	for(i=0; i<pStage->GetBlockNum(); i++)
 	{
+		mat = pStage->GetBlockObj(i)->GetMatBase();
+		diff = vecPos2 - vecPos1;
+
 		if( SearchPlane(pStage->GetBlockObj(i)->GetMesh(), 
-					&pStage->GetBlockObj(i)->GetMatBase(),
-					&vecPos1, &(vecPos2-vecPos1), &vecCross, NULL, &fLen))
+					&mat,
+					&vecPos1, &diff, &vecCross, NULL, &fLen))
 		{
 			/* 面が見つかったら、その交点から */
 			/* 指定ベクトルの間に見つかったかどうかを判定する */
-			if( D3DXVec3LengthSq(&(vecPos2-vecPos1)) > D3DXVec3LengthSq(&(vecCross-vecPos1)) )
+
+			diff2 = vecCross - vecPos1;
+			if( D3DXVec3LengthSq(&diff) > D3DXVec3LengthSq(&diff2) )
 			{
 				/* 面が見つかったとみなす */
 				return true;
