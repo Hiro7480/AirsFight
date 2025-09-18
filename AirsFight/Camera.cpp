@@ -43,11 +43,16 @@ CCamera::~CCamera()
 //------------------------------------------------------
 void CCamera::FrameMove(CMyPlayer* pMyPlayer)
 {
+	D3DXVECTOR3 vec;
+	D3DXMATRIX mat;
+
 	/* ロックオンしていないとき */
 	if(!pMyPlayer->GetLockFlg())
 	{
 		/* 目標となる角度の格納 */
-		SetNextYaw(&GetNormalVec3ToMat(NULL, &pMyPlayer->GetMatBase()));
+		mat = pMyPlayer->GetMatBase();
+		vec = GetNormalVec3ToMat(NULL, &mat);
+		SetNextYaw(&vec);
 		SetNextPitch(pMyPlayer->GetPitch()-10.0f);
 
 		// 現在角度を目標角度に近づける
@@ -87,10 +92,12 @@ void CCamera::FrameMove(CMyPlayer* pMyPlayer)
 //----------------------------------------------
 void CCamera::Render(CChara* pChara)
 {
+	D3DXVECTOR3 vec1 = pChara->GetPosStock();
+	D3DXVECTOR3 vec2(0.0f, 1.0f, 0.0f);
+
 	/* 対象位置とカメラ位置からビュー変換マトリクスを算出する */
-	D3DXMatrixLookAtLH( &m_matStock, &m_vecStock,
-									&pChara->GetPosStock(),
-									&D3DXVECTOR3( 0.0f, 1.0f, 0.0f ) );
+	D3DXMatrixLookAtLH(&m_matStock, &m_vecStock, &vec1, &vec2);
+
 	/* カメラ位置設定 */
 	m_pd3dDevice->SetTransform( D3DTS_VIEW, &m_matStock );
 }
@@ -129,7 +136,8 @@ void CCamera::SetPosition(CChara* pChara)
 	matTmp1 = matTmp2 * matTmp1;
 
 	// カメラのローカル座標を作成する
-	D3DXVec3TransformCoord(&vecTmp, &D3DXVECTOR3(0,0,m_fLength), &matTmp1);
+	D3DXVECTOR3 v = D3DXVECTOR3(0, 0, m_fLength);
+	D3DXVec3TransformCoord(&vecTmp, &v, &matTmp1);
 
 	// ローカル座標をワールド座標に変換する
 	vecTmp.x += pChara->GetPosBase().x;
