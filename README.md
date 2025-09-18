@@ -22,7 +22,6 @@
 
 ## ポートフォリオデータ
 実行ファイルやスクリーンショットはこちら。
-
 https://drive.google.com/file/d/1EuIKAvXrupdM-nDQvym006Bal9sp4QhV/view?usp=drive_link
 
 ## 操作方法（抜粋）
