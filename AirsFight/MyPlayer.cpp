@@ -21,7 +21,7 @@ CMyPlayer::CMyPlayer(LPDIRECT3DDEVICE8 d3dDevice):CChara(d3dDevice)
 		m_vecView[i]	*= 0;
 
 		/* ロックオンマーカーの作成 */
-		m_pLockMarker[i] = new CLockOnMarker(m_pd3dDevice, "data\\Game\\LockOn.png");
+		m_pLockMarker[i] = new CLockOnMarker(m_pd3dDevice, const_cast<TCHAR*>("data\\Game\\LockOn.png"));
 		m_pLockMarker[i]->SetRec(0,0, 64, 64);
 
 		/* キャラクタライフフォントの初期化 */
@@ -1412,7 +1412,7 @@ void CMyPlayer::CreateCharaName()
 {
 	for(int i=0; i<3; i++)
 	{
-		m_pCharaName[i] = new CFont(m_pd3dDevice, "ＭＳ ゴシック");
+		m_pCharaName[i] = new CFont(m_pd3dDevice, const_cast<TCHAR*>("ＭＳ ゴシック"));
 		m_pCharaName[i]->SetString(m_tagEnemyData[i].Name);
 		m_pCharaName[i]->SetFormat(DT_CENTER);
 		m_pCharaName[i]->SetColor(0, 255, 0);
@@ -1429,7 +1429,7 @@ void CMyPlayer::CreateCharaLife()
 {
 	for(int i=0; i<3; i++)
 	{
-		m_pCharaLife[i] = new CFont(m_pd3dDevice, "ＭＳ ゴシック");
+		m_pCharaLife[i] = new CFont(m_pd3dDevice, const_cast<TCHAR*>("ＭＳ ゴシック"));
 		m_pCharaLife[i]->SetString(*m_tagEnemyData[i].pNowLife);
 		m_pCharaLife[i]->SetFormat(DT_CENTER);
 		m_pCharaLife[i]->SetColor(0, 255, 0);

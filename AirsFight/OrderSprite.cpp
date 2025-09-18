@@ -26,12 +26,12 @@ COrderSprite::COrderSprite(LPDIRECT3DDEVICE8 d3dDevice, int nOrder, TCHAR* strNa
 	m_vecBase.y = (float)(140+(90*(m_nOrder-1)));
 
 	/* 順位フォーマットの作成 */
-	m_pFormat = new CSprite(d3dDevice, "Data\\Ending\\OrderFormat.png");
+	m_pFormat = new CSprite(d3dDevice, const_cast<TCHAR*>("Data\\Ending\\OrderFormat.png"));
 	m_pFormat->SetVec(m_vecBase);
 	m_pFormat->SetRec(0, 50*(m_nOrder-1), 400, 50*m_nOrder);
 
 	/* 名前フォントの作成 */
-	m_pName = new CFont(d3dDevice, "ＭＳ ゴシック");
+	m_pName = new CFont(d3dDevice, const_cast<TCHAR*>("ＭＳ ゴシック"));
 	m_pName->SetString(strName);
 	m_pName->SetRec((int)m_vecBase.x+120, (int)m_vecBase.y+20,
 					(int)m_vecBase.x+300, (int)m_vecBase.y+50);
@@ -45,7 +45,7 @@ COrderSprite::COrderSprite(LPDIRECT3DDEVICE8 d3dDevice, int nOrder, TCHAR* strNa
 	}
 
 	/* 死んだ数フォントの作成 */
-	m_pDeadNum = new CFont(d3dDevice, "ＭＳ ゴシック");
+	m_pDeadNum = new CFont(d3dDevice, const_cast<TCHAR*>("ＭＳ ゴシック"));
 	m_pDeadNum->SetString(nDeadNum);
 
 	m_pDeadNum->SetRec(	(int)m_vecBase.x+350, (int)m_vecBase.y+20,

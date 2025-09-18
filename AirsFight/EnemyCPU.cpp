@@ -139,8 +139,8 @@ void CEnemyCPU::ComputNextAction(CEffectManage* pEffectManage)
 
 
 	/* 現在の行動により次の行動をランダムにて決める */
-	static long lTmp = 5;
-	srand(lTmp * time(&lTmp));		// ランダムの初期化
+	static time_t t;
+	srand(t * time(&t));		// ランダムの初期化
 	switch(m_nNowAction)
 	{
 	/* スタート時 何もしない */

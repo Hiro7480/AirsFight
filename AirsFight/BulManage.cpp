@@ -22,7 +22,7 @@ CBulManage::CBulManage(LPDIRECT3DDEVICE8 d3dDevice)
 
 	/* ’eƒpƒ‰ƒ[ƒ^‚Ìì¬ */
 	m_tagParam[0].pBulMesh = new CMeshObject(m_pd3dDevice);
-	m_tagParam[0].pBulMesh->Create("data\\Bullet\\Bullet.X");
+	m_tagParam[0].pBulMesh->Create(const_cast<TCHAR*>("data\\Bullet\\Bullet.X"));
 	m_tagParam[0].pBulMesh->RestoreDeviceObjects();
 
 	m_tagParam[0].fSpeed = 3.0f;
